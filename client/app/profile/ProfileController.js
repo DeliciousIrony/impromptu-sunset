@@ -1,17 +1,21 @@
-app.controller('ProfileController', ['$scope', 'Sessions', function ($scope, Sessions) {
+app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', function ($scope, Sessions, Profiles) {
 
   $scope.margin = {top: 10, right: 50, bottom: 0, left: 70};
   $scope.width = 960 - $scope.margin.left - $scope.margin.right;
   $scope.height = 500 - $scope.margin.top - $scope.margin.bottom;
-
+  $scope.user = Profiles.getProfile();
+  $scope.sessions = [];
+  $scope.checkSessions = false;
   // Calls the Session factory to get the sessions of that user.
   $scope.getSessions = function (callback) {
-    Sessions.getSessions(function(data){
+    Sessions.userSessions($scope.user.id, function(data){
       $scope.sessions = data;
+      console.dir($scope.sessions);
       callback(data);
     });
   };
-
+  
+  // $scope.getSessions(function() {});
   // parse data before plotting it on d3
   var parseData = function(array) {
       var result = [];
@@ -28,13 +32,14 @@ app.controller('ProfileController', ['$scope', 'Sessions', function ($scope, Ses
   // When the d3 directive for that chart loads, the loaded method will be called
   // if the sessions are not yet populated, we will get them, otherwise plot.
   $scope.wordcount = { loaded : function(){
-    if($scope.sessions){
+    if($scope.checkSessions){
       var word_count = _.pluck($scope.sessions, "word_count");
       $scope.plot('wordcount',word_count, "Word Count Per Session");
     }
     else{
       $scope.getSessions(function(data){
         $scope.wordcount.loaded();
+        $scope.checkSessions = true;
       }); 
     }
   }};
@@ -43,13 +48,14 @@ app.controller('ProfileController', ['$scope', 'Sessions', function ($scope, Ses
   // When the d3 directive for that chart loads, the loaded method will be called
   // if the sessions are not yet populated, we will get them, otherwise plot.
   $scope.charcount = { loaded : function(){
-    if($scope.sessions){
+    if($scope.checkSessions){
       var char_count = _.pluck($scope.sessions, "char_count");
       $scope.plot('charcount', char_count, "Char Count Per Session");  
     }
     else{
       $scope.getSessions(function(data){
         $scope.charcount.loaded();
+        $scope.checkSessions = true;
       }); 
     }
   }};
@@ -58,7 +64,7 @@ app.controller('ProfileController', ['$scope', 'Sessions', function ($scope, Ses
   // When the d3 directive for that chart loads, the loaded method will be called
   // if the sessions are not yet populated, we will get them, otherwise plot.
   $scope.consistency = { loaded : function(){
-    if($scope.sessions){
+    if($scope.checkSessions){
       var potential = (1) * 10000 * 60; //potential score per minute
       var consistency = _.pluck($scope.sessions, "scores");
       consistency = _.filter(consistency, function(item){
@@ -76,6 +82,7 @@ app.controller('ProfileController', ['$scope', 'Sessions', function ($scope, Ses
     else{
       $scope.getSessions(function(data){
         $scope.consistency.loaded();
+        $scope.checkSessions = true;
       }); 
     }
   }};
