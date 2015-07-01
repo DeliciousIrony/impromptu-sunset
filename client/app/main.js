@@ -1,4 +1,4 @@
-app.controller('mainController', ['$scope', 'Users','Session', function ($scope, Users, Session) {
+app.controller('mainController', ['$scope', '$location', 'Users', 'Session', 'Profiles', function ($scope, $location, Users, Session, Profiles) {
 
   // controller action that logs out the user by calling the Users service
   $scope.logout = function () {
@@ -14,5 +14,9 @@ app.controller('mainController', ['$scope', 'Users','Session', function ($scope,
     return Session.getUser();
   };
 
+  $scope.userProfile = function(user) {
+    Profiles.setProfile({ username: user.username, id: user.userId });
+    $location.path('/profile')
+  }
 
 }]);
