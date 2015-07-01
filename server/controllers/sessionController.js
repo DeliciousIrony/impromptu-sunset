@@ -20,6 +20,21 @@ module.exports = {
     });
   },
 
+  sessionsSpecUser: function(req, res, next){
+    var userid = req.body.userId;
+    console.log(userid);
+    // using sequelize retrieve that user from
+    // the userid
+    db.User.findById(userid).then(function(user){
+      user.getSessions().then(function(x){
+        // return all user sessions
+        res.status(201).send(x);
+      }).catch(function(err){
+        res.status(422).send(err);
+      });
+    });
+  },
+
   // newSession creates a new session for the 
   // currently signed in user
   newSession: function(req, res, next){

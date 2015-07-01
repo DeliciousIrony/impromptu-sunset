@@ -64,10 +64,42 @@ angular.module('app.services', [])
       });
     };
 
+    var userSessions = function(userId, callback){
+      $http({
+        method: 'POST',
+        url: '/api/sessions/user',
+        data: { userId: userId }
+      })
+      .then(function(response) {
+        callback(response.data);
+      });
+    };
+
     return{
+      userSessions: userSessions,
       getSessions: getSessions
     };
   })
+
+  //the Profiles factory is used to keep track of the User Profile to be displayed
+  .factory('Profiles', function($http) {
+    currentProfileId = null;
+
+    var setProfileId = function(id) {
+      currentProfileId = id;
+      console.log('successfully set userId', currentProfileId);
+    };
+
+    var getProfileId = function() {
+      return currentProfileId;
+    };
+
+    return {
+      setProfileId: setProfileId,
+      getProfileId: getProfileId 
+    }
+  })
+
   // The Users factory handles api requests to /users on the server
   .factory('Users', function ($http, Session, $q) {
     var logout = function() {

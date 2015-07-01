@@ -7,6 +7,10 @@ module.exports = function (app) {
 
   // user must be logged in to access these methods.
   // if not will get a 401 response (check the helper method)
+
+  app.route('/user')
+    .post(sessionController.sessionsSpecUser);
+
   app.route('/')
     .get(helpers.ensureAuthenticated, sessionController.allSessions)
     .post(helpers.ensureAuthenticated,sessionController.newSession);
