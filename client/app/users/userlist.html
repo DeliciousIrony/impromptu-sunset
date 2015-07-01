@@ -1,5 +1,5 @@
 <div class="row" id="main-container" ng-controller="UsersController">
   <ul>
-    <li ng-repeat="user in users.userList">{{user.username}}</li>
+    <li ng-repeat="user in users.userList" ng-click="renderProfile(user.id)">{{user.username}}</li>
   </ul>
 </div>
