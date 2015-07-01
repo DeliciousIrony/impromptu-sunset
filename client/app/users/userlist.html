@@ -1,3 +1,5 @@
 <div class="row" id="main-container" ng-controller="UsersController">
-
+  <ul>
+    <li ng-repeat="user in users.userList">{{user.username}}</li>
+  </ul>
 </div>

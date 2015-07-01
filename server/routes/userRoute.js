@@ -20,6 +20,8 @@ module.exports = function (app) {
   // in the userController
   app.post('/signup', userController.signup);
 
+  app.route('/fetchusers')
+    .get(helpers.ensureAuthenticated,userController.fetchUsers);
   // if path is GET /api/users/logout, will check first
   // if user is logged in
     //will call the signout method in the userController.
