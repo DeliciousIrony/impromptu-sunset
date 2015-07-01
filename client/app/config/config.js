@@ -31,6 +31,11 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       url: '/results',
       templateUrl: 'app/results/results.html'
     })
+
+    .state('userlist', {
+      url: '/userlist',
+      templateUrl: 'app/users/userlist.html'
+    })
 })
 
 .run(['$http', '$rootScope','$cookies','$state','Session', function($http, $rootScope, $cookies,$state,Session) {
