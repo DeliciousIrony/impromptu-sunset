@@ -69,7 +69,7 @@ angular.module('app.services', [])
     };
   })
   // The Users factory handles api requests to /users on the server
-  .factory('Users', function ($http, Session) {
+  .factory('Users', function ($http, Session, $q) {
     var logout = function() {
       $http({
         method: 'GET',
@@ -111,11 +111,20 @@ angular.module('app.services', [])
         // console.log('data', data, 'staus', status);
       });
     };
-
+    
+    var allUsers = function() {
+      return $http({
+        method: 'GET',
+        url: '/api/users/fetchusers'
+      })
+      .success(function(data, status) {
+      });
+    };
 
     return {
       login: login,
       signUp: signUp,
-      logout: logout
+      logout: logout,
+      allUsers: allUsers
     };
   });
