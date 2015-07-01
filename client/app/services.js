@@ -83,20 +83,19 @@ angular.module('app.services', [])
 
   //the Profiles factory is used to keep track of the User Profile to be displayed
   .factory('Profiles', function($http) {
-    currentProfileId = null;
+    currentProfile = null;
 
-    var setProfileId = function(id) {
-      currentProfileId = id;
-      console.log('successfully set userId', currentProfileId);
+    var setProfile = function(profile) {
+      currentProfile = profile;
     };
 
-    var getProfileId = function() {
-      return currentProfileId;
+    var getProfile = function() {
+      return currentProfile;
     };
 
     return {
-      setProfileId: setProfileId,
-      getProfileId: getProfileId 
+      setProfile: setProfile,
+      getProfile: getProfile 
     }
   })
 
