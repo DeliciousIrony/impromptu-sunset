@@ -25,6 +25,19 @@ module.exports = {
     // destroy session and log user out
     req.logout();
     res.status(200).send("Successfully Logged Out");
+  },
+
+  fetchUsers: function(req, res, next){
+    var attributes = ['id', 'username'];
+    db.User.findAll({ attributes: attributes}).then(function(users){
+      console.log('Successful fetch of all Users');
+      var allUsers = [];
+      for (var i = 0; i < users.length; i++) {
+        allUsers.push(users[i].dataValues);
+      }
+      console.log(allUsers);
+      res.json({ userData: allUsers });
+    });
   }
 
 };
