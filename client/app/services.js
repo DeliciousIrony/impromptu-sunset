@@ -81,6 +81,26 @@ angular.module('app.services', [])
     };
   })
 
+  .factory('Comments', function($http){
+
+    var createComment = function(sessionId, comment, callback){
+      $http({
+        method: 'POST',
+        url: '/api/comments',
+        data: { 
+          'sessionId': sessionId,
+          'text': comment
+        }
+      })
+      .then(function(response) {
+        callback();
+      });
+    };
+
+    return {
+      createComment: createComment
+    }
+  })
   //the Profiles factory is used to keep track of the User Profile to be displayed
   .factory('Profiles', function($http) {
     currentProfile = null;
