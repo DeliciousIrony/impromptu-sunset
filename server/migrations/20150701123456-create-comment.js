@@ -11,12 +11,12 @@ module.exports = {
       text: {
         type: Sequelize.TEXT
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         model: 'Users',
         key: 'id'
       },
-      sessionId: {
+      SessionId: {
         type: Sequelize.INTEGER,
         model: 'Sessions',
         key: 'id'
