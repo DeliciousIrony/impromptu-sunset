@@ -22,6 +22,7 @@
         <li><a ng-hide="isAuthenticated()" ui-sref="signup">Signup</a></li>
         <li><a ng-hide="isAuthenticated()" ui-sref="login">Login</a></li>
         <li><a ng-show="isAuthenticated()" href="#" ng-click="logout()">Logout</a></li>
+        <li><a ng-show="isAuthenticated()" ui-sref="game">Game</a></li>
         <li><a ng-show="isAuthenticated()" ng-click="userProfile(user())">Profile</a></li>
         <li><a ng-show="isAuthenticated()" ui-sref="userlist">All Users</a></li>
         <li><a ng-show="isAuthenticated()">Welcome {{user().username}}</a></li>
@@ -48,6 +49,7 @@
   <script src="app/home/ScoreService.js"></script>
   <script src="app/home/TimeService.js"></script>
   <script src="app/home/ColorIndexService.js"></script>
+  <script src="app/game/GameController.js"></script>
   <script src="app/results/ResultsController.js"></script>
   <script src="app/results/ResultsService.js"></script>
   <script src="app/users/UsersController.js"></script>
