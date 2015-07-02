@@ -23,7 +23,11 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal',
         }
       }
     });
-  }
+  };
+
+  $scope.$on('refreshView', function(event, data) {
+    $scope.getSessions(function() {})
+  });
 
   // Calls the Session factory to get the sessions of that user.
   $scope.getSessions = function (callback) {
