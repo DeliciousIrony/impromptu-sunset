@@ -12,6 +12,11 @@
           <div>Session #{{ $index + 1 }}</div>
           <div>Completed work:</div>
           <div>{{session.text}}</div>
+          <div>Comments:</div>
+          <div class="comments" ng-repeat="comment in session.Comments">
+            <span>{{comment.User.username}}:</span>
+            <span>{{comment.text}}</span>
+          </div>
         </div>
       </div>
     </div>

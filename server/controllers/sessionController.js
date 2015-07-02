@@ -26,9 +26,16 @@ module.exports = {
     // using sequelize retrieve that user from
     // the userid
     db.User.findById(userid).then(function(user){
-      user.getSessions().then(function(x){
+      user.getSessions({
+        include: [{
+          model: db.Comment,
+          include: [{
+            model: db.User
+          }]
+        }]
+      }).then(function(sessions){
         // return all user sessions
-        res.status(201).send(x);
+        res.status(201).send(sessions);
       }).catch(function(err){
         res.status(422).send(err);
       });
