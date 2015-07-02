@@ -45,8 +45,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     classMethods: {
       associate: function(models) {
-        // establishing relationship between User and Session
+        // establishing relationship between User and Session/Comment
         User.hasMany(models.Session);
+        User.hasMany(models.Comment);
       },
     },
     instanceMethods: {
