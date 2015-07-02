@@ -6,6 +6,7 @@ app.controller('GameController', ['$scope', '$rootScope', '$timeout','$state', '
     $state.go("index"); 
   }
   console.log('your socket id: ', $scope.socket.id);
+  $scope.opponentsOrdered = [];
   $scope.opponents = {};
   $scope.opponents[$scope.socket.id] = {};
   $scope.opponents[$scope.socket.id].text = '';
@@ -38,12 +39,29 @@ app.controller('GameController', ['$scope', '$rootScope', '$timeout','$state', '
     users.forEach(function(user){
       $scope.$apply(function(){
         $scope.opponents[user[0]] = {};
+        $scope.opponents[user[0]].id = user[0];
         $scope.opponents[user[0]].text = '';
         $scope.opponents[user[0]].queue = user[1];
+        $scope.opponentsOrdered[$scope.opponents[user[0]].queue] = $scope.opponents[user[0]];
       }); 
-    })
-    
-    console.log('opponents', JSON.stringify($scope.opponents))
+    });
+
+    //console.log(JSON.stringify($scope.opponents), JSON.stringify($scope.opponentsOrdered))
+
+    $scope.rotate = $interval(function(){
+      var temp = $scope.opponentsOrdered[0].text;
+      var len = $scope.opponentsOrdered.length;
+      //console.log($scope.opponentsOrdered[1] === $scope.opponents[$scope.opponentsOrdered[1].id])
+
+      for(var i = 0; i < len - 1; i++){
+        $scope.opponentsOrdered[i].text = $scope.opponentsOrdered[i+1].text;
+      }
+      //console.log($scope.opponentsOrdered[len-1])
+      $scope.opponentsOrdered[len - 1].text = temp;
+
+      console.log($scope.opponentsOrdered)
+    }, 60000);
+    //console.log('opponents', JSON.stringify($scope.opponents))
     // $interval(function(){
     //   var first = false, last, temp;
 
