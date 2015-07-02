@@ -7,6 +7,7 @@ module.exports = function(app, express){
   
   var userRouter = express.Router();
   var sessionRouter = express.Router();
+  var commentRouter = express.Router();
 
   // express-session to save our cookie
   app.use(session({
@@ -26,12 +27,14 @@ module.exports = function(app, express){
   // based on the path
   app.use('/api/users', userRouter);
   app.use('/api/sessions', sessionRouter);
+  app.use('/api/comments', commentRouter);
   app.use(helpers.errorLogger);
   app.use(helpers.errorHandler);
   
   // include the routers
   require('../routes/userRoute.js')(userRouter);
   require('../routes/sessionRoute.js')(sessionRouter);
+  require('../routes/commentRoute.js')(commentRouter);
 
   
 };
