@@ -1,4 +1,4 @@
-app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', function ($scope, Sessions, Profiles) {
+app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal', function ($scope, Sessions, Profiles, $modal) {
 
   $scope.margin = {top: 10, right: 50, bottom: 0, left: 70};
   $scope.width = 960 - $scope.margin.left - $scope.margin.right;
@@ -6,6 +6,25 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', function 
   $scope.user = Profiles.getProfile();
   $scope.sessions = [];
   $scope.checkSessions = false;
+  $scope.animationsEnabled = true;
+
+  //Used to open the Comment Modal
+  $scope.open = function (sessionNum, size) {
+    console.log("This is the sessionNum passed in", sessionNum);
+    console.log($scope.sessions[sessionNum]);
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalContent.html',
+      controller: 'CommentModalCtrl',
+      size: size,
+      resolve: {
+        session: function() {
+          return $scope.sessions[sessionNum];
+        }
+      }
+    });
+  }
+
   // Calls the Session factory to get the sessions of that user.
   $scope.getSessions = function (callback) {
     Sessions.userSessions($scope.user.id, function(data){
@@ -86,7 +105,6 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', function 
       }); 
     }
   }};
-    
 
   // parses data then plots the graph by calling the d3 createGraph method for that chart.
   // control is what connects us to the directive. we pass in in the view. so each chart has its
@@ -95,6 +113,5 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', function 
     data = parseData(data);
     $scope[control].createGraph(data, type);
   };
-
 
 }]);
