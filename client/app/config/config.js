@@ -21,6 +21,11 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       templateUrl: 'app/login/login.html'
     })
 
+    .state('game', {
+      url: '/game',
+      templateUrl: 'app/game/game.html'
+    })
+
     .state('profile', {
       url: '/profile',
       templateUrl: 'app/profile/profile.html',

@@ -39,9 +39,48 @@ var allSocketIDs = {};
 // used to prevent more than one tab / socket connection affecting the user's color index
 var allUsernames = {};
 
+var users = {};
+var rooms = {}, roomIdx = 0, roomLimit = 3;
 // establishes a new user's connection socket
 io.on('connection', function(socket) {
+  socket.on('joinGame', function() {
+    users[socket.id] = {};
+    users[socket.id].id = socket.id;
+    socket.emit('getUser', null);
 
+    if(!rooms[roomIdx]){
+      rooms[roomIdx] = {
+        users: [],
+        roomSize: 0
+      }
+    }
+
+    if(rooms[roomIdx].roomSize < roomLimit){
+      socket.join(roomIdx);
+      rooms[roomIdx].users.push([socket.id, rooms[roomIdx].roomSize]);
+      rooms[roomIdx].roomSize++;
+    }
+
+    if(rooms[roomIdx].roomSize === roomLimit){
+      console.log('start')
+      //send start signal and opponents
+      console.log(roomIdx, rooms[roomIdx].users)
+      io.to(roomIdx).emit('start', rooms[roomIdx].users);
+      //console.log(rooms)
+      roomIdx++;
+    } 
+
+    socket.on('sendUser', function(username){
+      //console.log(username)
+      users[socket.id].username = username;
+    });
+
+    socket.on('post', function(data){
+      //console.log('received', data)
+      socket.to(socket.rooms[1]).emit('update', data);
+    });
+    
+  });
   // when they disconnect
   socket.on('disconnect', function() {
     if (allSocketIDs[socket.id]) {

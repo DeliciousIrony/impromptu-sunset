@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row" id="main-container" ng-controller="GameController">
+    <div class="col-sm-9" id="content-container">
+      <div ng-show="!start">Wait Timer</div>
+      <textarea ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keypress="newData($event)"></textarea>
+      <textarea disabled="true" ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">{{opponent.text}}</textarea>
+    </div>
+  </div>
+</div>
