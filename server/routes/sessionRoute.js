@@ -9,7 +9,7 @@ module.exports = function (app) {
   // if not will get a 401 response (check the helper method)
 
   app.route('/user')
-    .post(sessionController.sessionsSpecUser);
+    .post(helpers.ensureAuthenticated, sessionController.sessionsSpecUser);
 
   app.route('/')
     .get(helpers.ensureAuthenticated, sessionController.allSessions)
