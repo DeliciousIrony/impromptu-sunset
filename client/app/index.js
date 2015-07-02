@@ -4,5 +4,6 @@ var app = angular.module('app', [
   'app.services',
   'app.directives',
   'ngCookies',
-  'ngMessages'
+  'ngMessages',
+  'ui.bootstrap'
   ]);
