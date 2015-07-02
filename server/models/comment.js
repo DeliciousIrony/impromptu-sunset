@@ -3,9 +3,7 @@
 // 'sequelize model:create'
 module.exports = function(sequelize, DataTypes) {
   var Comment = sequelize.define('Comment', {
-    text: DataTypes.TEXT,
-    userId: DataTypes.INTEGER,
-    sessionId: DataTypes.INTEGER
+    text: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
