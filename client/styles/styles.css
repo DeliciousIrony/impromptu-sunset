@@ -203,3 +203,27 @@ input.set-timer-components {
   margin: 20px;
   font-size: 1.25em;
 }
+
+.modal-head {
+  font-size: 1.4em;
+}
+
+.modal-text {
+  padding: 10px;
+  font-size: 1.3em;
+}
+
+.btn-modal {
+  font-size: 1.25em;
+}
+
+.comment-area {
+  font-size:1.15em;
+  height: 125px;
+  width: 525px;
+  resize: none;
+}
+
+.comment-div {
+  padding: 10px;
+}
