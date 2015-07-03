@@ -6,42 +6,58 @@
     </div>
       <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">Write a comment</h3>
+            <h3 class="modal-title">Write a Comment</h3>
         </div>
         <div class="modal-body">
           <div ng-model="session">
             <div>
-              <div>Writing:</div>
-              <span>{{session.text}}</span>
+              <div><span class="modal-head">Prose:</span></div>
+              <div class="modal-text"><span>{{session.text}}</span></div>
             </div>
             <div>
-              <span>Your Comment here:</span>
-              <input ng-model="commentText"></input>
+              <div>
+                <span class="modal-head">Comment:</span>
+              </div>
+              <div class="comment-div">
+                <textarea class="comment-area" type="text" maxlength="300" ng-model="commentText"></textarea>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          <button class="btn btn-primary btn-modal" ng-click="ok()">Submit Comment</button>
+          <button class="btn btn-warning btn-modal" ng-click="cancel()">Cancel</button>
         </div>
     </script>
 
    <div id='writing' class="container">
       <div class="row">
         <div class="session" ng-repeat="session in sessions">
-
-          <div>Session #{{ $index + 1 }}</div>
-          <div>Completed work:</div>
-          <div>{{session.text}}</div>
+          <table>
+            <tbody>
+              <tr><td><span class="session-num">Writing Session #{{ $index + 1 }}</span></td></tr>
+              <tr><td><span class="time-complete">Time Completed: {{session.session_time}} minutes</span></td></tr>
+              <tr><td class="text-cell">
+                <span class="session-text">{{session.text}}</span>
+              </td></tr>
+            </tbody>
+          </table>
           <accordion>
-          <accordion-group heading="Comments">
-            <div class="comments" ng-repeat="comment in session.Comments">
-              <span>{{comment.User.username}}:</span>
-              <span>{{comment.text}}</span>
-            </div>
-            <button ng-click="open($index)">Create Comment</button>
-            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-          </accordion-group>
+            <accordion-group heading="Comments">
+              <table>
+                <tbody>
+                  <tr ng-repeat="comment in session.Comments">
+                    <td class="name-comment">
+                      <span>{{comment.User.username}}:</span>
+                    </td>
+                    <td class="text-comment">
+                      <span>{{comment.text}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="comment-btn" ng-click="open($index)">Write Comment</button>
+            </accordion-group>
           </accordion>
         </div>
       </div>

@@ -162,3 +162,68 @@ input.set-timer-components {
 .userlist {
   margin-left: 3em;
 }
+
+.session-num {
+  font-size: 1.9em;
+}
+
+.time-complete {
+  font-size: 1.5em;
+}
+
+.text-cell {
+  padding: 20px;
+}
+
+.session-text {
+  font-size: 1.35em;
+}
+
+.name-comment {
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-right:5px;
+  padding-left:20px;
+  font-size:1.15em;
+}
+
+.text-comment {
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-right:20px;
+  padding-left:5px;
+  font-size:1.15em;
+}
+
+.comments {
+  padding: 10px;
+}
+
+.comment-btn {
+  margin: 20px;
+  font-size: 1.25em;
+}
+
+.modal-head {
+  font-size: 1.4em;
+}
+
+.modal-text {
+  padding: 10px;
+  font-size: 1.3em;
+}
+
+.btn-modal {
+  font-size: 1.25em;
+}
+
+.comment-area {
+  font-size:1.15em;
+  height: 125px;
+  width: 525px;
+  resize: none;
+}
+
+.comment-div {
+  padding: 10px;
+}
