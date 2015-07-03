@@ -51,7 +51,8 @@ app.controller('GameController', ['$scope', '$rootScope', '$timeout','$state', '
   $scope.startTimer = function() {
     if (angular.isDefined(game)) return;
 
-    var duration = 3;
+    var duration = 1;
+    var count = 1;
     Time.setMinuteCount(duration);
 
     Time.setStartTime();
@@ -59,11 +60,15 @@ app.controller('GameController', ['$scope', '$rootScope', '$timeout','$state', '
 
     game = $interval(function() {
       if (Time.checkForEnd()) {
-        $scope.stopTime();
+        $scope.stopTimer();
+        $scope.done = true;
       } else {
         $scope.timer = Time.getTimer();
-        if ($scope.timer.split(':')[1] === '00') {
+        if ($scope.timer === '0:00' && count !== 3) {
           $scope.rotateText();
+          Time.setStartTime();
+          $scope.timer = Time.getTimer();
+          count++;
         }
       }
     }, 1000, 0);
