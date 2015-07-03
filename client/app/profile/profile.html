@@ -29,10 +29,15 @@
    <div id='writing' class="container">
       <div class="row">
         <div class="session" ng-repeat="session in sessions">
-
-          <div>Session #{{ $index + 1 }}</div>
-          <div>Completed work:</div>
-          <div>{{session.text}}</div>
+          <table>
+            <tbody>
+              <tr><td><span class="session-num">Session #{{ $index + 1 }}</span></td></tr>
+              <tr><td><span class="time-complete">Time Completed: {{session.session_time}} minutes</span></td></tr>
+              <tr><td class="text-cell">
+                <span class="session-text">{{session.text}}</span>
+              </td></tr>
+            </tbody>
+          </table>
           <accordion>
           <accordion-group heading="Comments">
             <div class="comments" ng-repeat="comment in session.Comments">
