@@ -14,12 +14,12 @@
 	      	</tr>
 	      	<tr>
 	      		<td><textarea ng-disabled="!(start) || begin" classtype="text" ng-model="opponents[socket.id].prompt"></textarea></td>
-	      		<td><textarea ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
+	      		<td><textarea class="col-sm-12 form-control" ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
 	      		<td><div> {{ opponents[socket.id].username }} </div></td>
 	      	</tr>
 	      	<tr ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">
 	      		<td><textarea disabled="true" classtype="text">{{opponent.prompt}}</textarea></td>
-	      		<td><textarea disabled="true">{{opponent.text}}</textarea></td>
+	      		<td><textarea class="col-sm-12 form-control" disabled="true">{{opponent.text}}</textarea></td>
 	      		<td><div> {{ opponent.username }} </div></td>
 	      	</tr>
 	      </table>
