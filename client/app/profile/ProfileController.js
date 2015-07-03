@@ -1,4 +1,4 @@
-app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal', function ($scope, Sessions, Profiles, $modal) {
+app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal', 'Comments', function ($scope, Sessions, Profiles, $modal, Comments) {
 
   $scope.margin = {top: 10, right: 50, bottom: 0, left: 70};
   $scope.width = 960 - $scope.margin.left - $scope.margin.right;
@@ -10,8 +10,6 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal',
 
   //Used to open the Comment Modal
   $scope.open = function (sessionNum, size) {
-    console.log("This is the sessionNum passed in", sessionNum);
-    console.log($scope.sessions[sessionNum]);
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'myModalContent.html',
@@ -20,13 +18,20 @@ app.controller('ProfileController', ['$scope', 'Sessions', 'Profiles', '$modal',
       resolve: {
         session: function() {
           return $scope.sessions[sessionNum];
+        },
+        sessionNum: function() {
+          return sessionNum;
         }
       }
     });
   };
 
+  //update the Comments for a specific Session, after a comment has
+  //been successfully written to PostgreSQL
   $scope.$on('refreshView', function(event, data) {
-    $scope.getSessions(function() {})
+    Comments.getComments($scope.sessions[data].id, function(res){
+      $scope.sessions[data].Comments = res;
+    });
   });
 
   // Calls the Session factory to get the sessions of that user.
