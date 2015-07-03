@@ -162,3 +162,20 @@ input.set-timer-components {
 .userlist {
   margin-left: 3em;
 }
+
+.session-num {
+  font-size: 1.9em;
+}
+
+.time-complete {
+  font-size: 1.5em;
+}
+
+.text-cell {
+  padding: 20px;
+}
+
+.session-text {
+  font-size: 1.25em;
+
+}
