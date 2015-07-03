@@ -97,7 +97,19 @@ angular.module('app.services', [])
       });
     };
 
+    var getComments = function(sessionId, callback){
+      $http({
+        method: 'POST',
+        url: '/api/comments/grab',
+        data: { 'sessionId': sessionId }
+      })
+      .then(function(response){
+        callback(response.data);
+      });
+    };
+
     return {
+      getComments: getComments,
       createComment: createComment
     }
   })

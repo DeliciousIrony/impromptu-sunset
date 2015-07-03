@@ -11,4 +11,6 @@ module.exports = function (app) {
   app.route('/')
     .post(commentController.newComment);
 
+  app.route('/grab')
+    .post(commentController.getComments);
 };
