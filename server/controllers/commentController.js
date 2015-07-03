@@ -2,6 +2,24 @@ var passport = require('passport');
 var db = require('../models/index.js');
 
 module.exports = {
+
+  getComments: function(req, res, next){
+    var sessionId = req.body.sessionId;
+    db.Session.findById(sessionId).then(function(session) {
+      session.getComments({
+        include: [{
+          model: db.User
+        }],
+        order: 'id ASC'
+      }).then(function(comments){
+        // return all comments specific to sessionId
+        res.status(201).send(comments);
+      }).catch(function(err){
+        res.status(422).send(err);
+      });
+    });
+  },
+
   // newComment creates a new comment for the 
   // currently signed in user
   newComment: function(req, res, next){
