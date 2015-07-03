@@ -6,23 +6,27 @@
     </div>
       <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">Write a comment</h3>
+            <h3 class="modal-title">Write a Comment</h3>
         </div>
         <div class="modal-body">
           <div ng-model="session">
             <div>
-              <div>Writing:</div>
-              <span>{{session.text}}</span>
+              <div><span class="modal-head">Prose:</span></div>
+              <div class="modal-text"><span>{{session.text}}</span></div>
             </div>
             <div>
-              <span>Your Comment here:</span>
-              <input ng-model="commentText"></input>
+              <div>
+                <span class="modal-head">Comment:</span>
+              </div>
+              <div class="comment-div">
+                <textarea class="comment-area" type="text" maxlength="300" ng-model="commentText"></textarea>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          <button class="btn btn-primary btn-modal" ng-click="ok()">Submit Comment</button>
+          <button class="btn btn-warning btn-modal" ng-click="cancel()">Cancel</button>
         </div>
     </script>
 
