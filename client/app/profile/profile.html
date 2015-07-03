@@ -31,7 +31,7 @@
         <div class="session" ng-repeat="session in sessions">
           <table>
             <tbody>
-              <tr><td><span class="session-num">Session #{{ $index + 1 }}</span></td></tr>
+              <tr><td><span class="session-num">Writing Session #{{ $index + 1 }}</span></td></tr>
               <tr><td><span class="time-complete">Time Completed: {{session.session_time}} minutes</span></td></tr>
               <tr><td class="text-cell">
                 <span class="session-text">{{session.text}}</span>
@@ -39,14 +39,21 @@
             </tbody>
           </table>
           <accordion>
-          <accordion-group heading="Comments">
-            <div class="comments" ng-repeat="comment in session.Comments">
-              <span>{{comment.User.username}}:</span>
-              <span>{{comment.text}}</span>
-            </div>
-            <button ng-click="open($index)">Create Comment</button>
-            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-          </accordion-group>
+            <accordion-group heading="Comments">
+              <table>
+                <tbody>
+                  <tr ng-repeat="comment in session.Comments">
+                    <td class="name-comment">
+                      <span>{{comment.User.username}}:</span>
+                    </td>
+                    <td class="text-comment">
+                      <span>{{comment.text}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="comment-btn" ng-click="open($index)">Write Comment</button>
+            </accordion-group>
           </accordion>
         </div>
       </div>
