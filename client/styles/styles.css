@@ -153,3 +153,8 @@ input.set-timer-components {
   stroke-width: 1.5px;
 }
 
+.center-row {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+}

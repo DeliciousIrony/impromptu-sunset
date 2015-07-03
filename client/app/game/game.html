@@ -1,9 +1,29 @@
 <div class="container-fluid">
   <div class="row" id="main-container" ng-controller="GameController">
     <div class="col-sm-9" id="content-container">
-      <div ng-show="!start">Wait Timer</div>
-      <textarea ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keypress="newData($event)"></textarea>
-      <textarea disabled="true" ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">{{opponent.text}}</textarea>
+      <div ng-show="!start" class="center-row">Wait for other opponents...</div>
+      <div ng-show="start && !(begin)" class="center-row">Enter a prompt within 10 seconds...</div>
+      <div ng-show="begin" class="center-row">WRITE!!</div>
+      <h1 class="countdown-box set-timer-components timer-text center-row" ng-show="begin"> {{ timer }} </h1>
+      <div class="center-row">
+	      <table class="gameTable center-row">
+	      	<tr>
+	      		<td class="text-center">Prompt</td>
+	      		<td class="text-center">Writing</td>
+	      		<td class="text-center">User</td>
+	      	</tr>
+	      	<tr>
+	      		<td><textarea ng-disabled="!(start) || begin" classtype="text" ng-model="opponents[socket.id].prompt"></textarea></td>
+	      		<td><textarea ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
+	      		<td><div> {{ opponents[socket.id].username }} </div></td>
+	      	</tr>
+	      	<tr ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">
+	      		<td><textarea disabled="true" classtype="text">{{opponent.prompt}}</textarea></td>
+	      		<td><textarea disabled="true">{{opponent.text}}</textarea></td>
+	      		<td><div> {{ opponent.username }} </div></td>
+	      	</tr>
+	      </table>
+	  </div>
     </div>
   </div>
 </div>

@@ -43,10 +43,10 @@ var users = {};
 var rooms = {}, roomIdx = 0, roomLimit = 3;
 // establishes a new user's connection socket
 io.on('connection', function(socket) {
-  socket.on('joinGame', function() {
+  socket.on('joinGame', function(username) {
     users[socket.id] = {};
     users[socket.id].id = socket.id;
-    socket.emit('getUser', null);
+    users[socket.id].username = username;
 
     if(!rooms[roomIdx]){
       rooms[roomIdx] = {
@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
 
     if(rooms[roomIdx].roomSize < roomLimit){
       socket.join(roomIdx);
-      rooms[roomIdx].users.push([socket.id, rooms[roomIdx].roomSize]);
+      rooms[roomIdx].users.push([socket.id, rooms[roomIdx].roomSize, users[socket.id].username]);
       rooms[roomIdx].roomSize++;
     }
 
@@ -70,14 +70,14 @@ io.on('connection', function(socket) {
       roomIdx++;
     } 
 
-    socket.on('sendUser', function(username){
-      //console.log(username)
-      users[socket.id].username = username;
-    });
-
     socket.on('post', function(data){
       //console.log('received', data)
       socket.to(socket.rooms[1]).emit('update', data);
+    });
+
+    socket.on('postPrompt', function(data){
+      //console.log('received', data)
+      socket.to(socket.rooms[1]).emit('updatePrompt', data);
     });
     
   });
