@@ -245,3 +245,7 @@ input.set-timer-components {
 .comment-sect {
   padding: 15px;
 }
+
+.gamearea {
+  width: 600px;
+}
