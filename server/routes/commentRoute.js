@@ -9,8 +9,8 @@ module.exports = function (app) {
   // if not will get a 401 response (check the helper method)
 
   app.route('/')
-    .post(commentController.newComment);
+    .post(helpers.ensureAuthenticated, commentController.newComment);
 
   app.route('/grab')
-    .post(commentController.getComments);
+    .post(helpers.ensureAuthenticated, commentController.getComments);
 };
