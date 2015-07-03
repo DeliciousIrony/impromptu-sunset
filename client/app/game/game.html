@@ -6,24 +6,24 @@
       <div ng-show="begin" class="center-row">WRITE!!</div>
       <h1 class="countdown-box set-timer-components timer-text center-row" ng-show="begin"> {{ timer }} </h1>
       <div class="center-row">
-	      <table class="gameTable center-row">
-	      	<tr>
-	      		<td class="text-center">Prompt</td>
-	      		<td class="text-center">Writing</td>
-	      		<td class="text-center">User</td>
-	      	</tr>
-	      	<tr>
-	      		<td><textarea ng-disabled="!(start) || begin" classtype="text" ng-model="opponents[socket.id].prompt"></textarea></td>
-	      		<td><textarea class="col-sm-12 form-control" ng-disabled="!start" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
-	      		<td><div> {{ opponents[socket.id].username }} </div></td>
-	      	</tr>
-	      	<tr ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">
-	      		<td><textarea disabled="true" classtype="text">{{opponent.prompt}}</textarea></td>
-	      		<td><textarea class="col-sm-12 form-control" disabled="true">{{opponent.text}}</textarea></td>
-	      		<td><div> {{ opponent.username }} </div></td>
-	      	</tr>
-	      </table>
-	  </div>
+        <table class="gameTable center-row table">
+          <tr>
+            <th class="text-center">Prompt</th>
+            <th class="text-center">Writing</th>
+            <th class="text-center">User</th>
+          </tr>
+          <tr>
+            <td><input ng-disabled="!start || begin" classtype="text" ng-model="opponents[socket.id].prompt"></input></td>
+            <td><textarea class="col-sm-12 form-control gamearea" ng-disabled="!begin" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
+            <td><div> {{ opponents[socket.id].username }} </div></td>
+          </tr>
+          <tr ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">
+            <td><input disabled="true" value="{{opponent.prompt}}"></input></td>
+            <td><textarea class="col-sm-12 form-control gamearea" disabled="true">{{opponent.text}}</textarea></td>
+            <td><div> {{ opponent.username }} </div></td>
+          </tr>
+        </table>
+    </div>
     </div>
   </div>
 </div>
