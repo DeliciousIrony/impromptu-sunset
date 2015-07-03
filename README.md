@@ -4,9 +4,9 @@ WordFlow is a text editor with accountability. Instead of just telling writers h
 
 ## Team
 
-  - __Product Owner__: Bahia ElSharkawy
-  - __Scrum Master__: Peter Espe
-  - __Development Team Members__: JD Davis
+  - __Product Owner__: Ashwin Aravindan
+  - __Scrum Master__: Niall O'Kane
+  - __Development Team Members__: David Hom
 
 ## Table of Contents
 
