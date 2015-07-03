@@ -1,8 +1,19 @@
 <div class="row" id="main-container" ng-controller="UsersController">
-  <div>
-    <h2>Click on a user below to see their Writing</h2>
-    <ul>
-      <li ng-repeat="user in users.userList" ng-click="renderProfile(user)">{{user.username}}</li>
-    </ul>
+  <div class="userlist" >
+    <div>
+      <h1>List of Writers</h1>
+      <h3>Click on a Writer's username to view their profile</h3>
+    </div>
+    <div class="col-sm-3 well" id="sidebar-container">
+      <table>
+      <tbody>
+        <tr ng-repeat="user in users.userList">
+          <td>
+            <span class="user-text-span my-user-text-span"  ng-click="renderProfile(user)">{{user.username}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
   </div>
 </div>
