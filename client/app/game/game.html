@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <td><input ng-disabled="!start || begin" classtype="text" ng-model="opponents[socket.id].prompt"></input></td>
-            <td><textarea class="col-sm-12 form-control gamearea" ng-disabled="!begin" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
+            <td><textarea class="col-sm-12 form-control gamearea" ng-disabled="!begin || done" ng-model="opponents[socket.id].text" ng-keyup="newData($event)"></textarea></td>
             <td><div> {{ opponents[socket.id].username }} </div></td>
           </tr>
           <tr ng-hide="id === socket.id" ng-repeat="(id, opponent) in opponents">
